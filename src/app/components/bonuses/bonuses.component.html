@@ -1,0 +1,46 @@
+<li>
+  <div class="uk-child-width-1-1@m" uk-grid>
+    <div>
+      <div class="uk-grid" uk-grid>
+        <div class="uk-width-3-4@m">
+          <div *ngIf="editingBonus || addingBonus" class="uk-child-width-1-2@m" uk-grid>
+            <div>
+              <input [(ngModel)]="tempBonus.amount" class="uk-input" placeholder="Amount" type="text">
+            </div>
+            <div>
+              <input [(ngModel)]="tempBonus.description" class="uk-input" placeholder="Description" type="text">
+            </div>
+          </div>
+          <p *ngIf="!editingBonus && !addingBonus">Listed below is {{ employee.firstName }} {{ employee.lastName }}'s history of bonuses during their role as a {{ employee.role }}. Currently, {{employee.firstName}}'s 
+              annual bonuses total as a {{employee.role}} is <span><b>${{totalBonuses}}</b></span>.
+          </p>
+        </div>
+        <div class="uk-width-1-4@m">
+          <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+            <div *ngIf="editingBonus || addingBonus">
+              <button class="uk-button uk-button-default uk-width-1-1 uk-padding-remove" href="" (click)="cancelBonus()">Cancel</button>
+            </div>
+            <div *ngIf="addingBonus">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="saveBonus()">Save</button>
+            </div>
+            <div *ngIf="editingBonus">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="updateBonus()">Update</button>
+            </div>
+          </div>
+          <button *ngIf="!editingBonus && !addingBonus" class="uk-button uk-button-secondary uk-width-1-1" href="" (click)="addBonus()">Add Bonus</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-bonus *ngFor="let b of bonus"
+        [b]="b" 
+        [editingBonus]="editingBonus"
+        [idSelected]="selectedId === b.id"
+        [employee]="employee"
+        (editBonusEvent)="editEventHandler($event)"
+        (selectBonusEvent)="selectEventHandler($event)"
+        (removeBonusEvent)="removeEventHandler($event)"
+        ></app-bonus>
+    </div>
+  </div>
+</li>

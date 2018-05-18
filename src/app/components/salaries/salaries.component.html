@@ -1,0 +1,48 @@
+<li>
+  <div class="uk-child-width-1-1@m" uk-grid>
+    <div>
+      <div class="uk-grid" uk-grid>
+        <div class="uk-width-3-4@m">
+          <div *ngIf="editingSalary || addingSalary" class="uk-child-width-1-2@m" uk-grid>
+            <div>
+              <input [(ngModel)]="tempSalary.amount" class="uk-input" placeholder="Amount" type="text">
+            </div>
+            <div>
+              <input [(ngModel)]="tempSalary.description" class="uk-input" placeholder="Description" type="text">
+            </div>
+          </div>
+          <p *ngIf="!editingSalary && !addingSalary">Listed below is {{ employee.firstName }} {{ employee.lastName }}'s history of 
+            financial compensation for fulfilling their role as a {{ employee.role }}. Currently, {{employee.firstName}}'s 
+            annual salary as a {{employee.role}} is <span><b>${{currentSalary}}</b></span>.
+          </p>
+        </div>
+        <div class="uk-width-1-4@m">
+          <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+            <div *ngIf="editingSalary || addingSalary">
+              <button class="uk-button uk-button-default uk-width-1-1 uk-padding-remove" href="" (click)="cancelSalary()">Cancel</button>
+            </div>
+            <div *ngIf="addingSalary">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="saveSalary()">Save</button>
+            </div>
+            <div *ngIf="editingSalary">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="updateSalary()">Update</button>
+            </div>
+          </div>
+          <button *ngIf="!editingSalary && !addingSalary" class="uk-button uk-button-secondary uk-width-1-1" href="" (click)="addSalary()">Add Salary</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-salary
+        *ngFor="let salary of salaries"
+        [salary]="salary"
+        [editingSalary]="editingSalary"
+        [idSelected]="selectedId === salary.id"
+        [employee]="employee"
+        (editSalaryEvent)="editEventHandler($event)"
+        (selectSalaryEvent)="selectEventHandler($event)"
+        (removeSalaryEvent)="removeEventHandler($event)"
+        ></app-salary>
+    </div>
+  </div>
+</li>

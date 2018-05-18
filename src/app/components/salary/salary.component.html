@@ -1,0 +1,20 @@
+<ul class="uk-animation-fade uk-list uk-no-select">
+  <li>
+    <h3 (click)="selectSalary()" class="uk-accordion-title">${{ salary.amount }}</h3>
+    <div *ngIf="idSelected" class="uk-accordion-content">
+      <div class="uk-grid">
+        <div (click)="selectSalary()" class="uk-width-3-4@m">
+          <p class="uk-margin-bottom">{{ salary.description }}</p>
+        </div>
+        <div class="uk-width-1-4@m">
+          <div class="uk-flex uk-flex-right">
+            <button *ngIf="!editingSalary" class="uk-button uk-button-secondary" href="" (click)="editSalary()">Edit</button>
+          </div>
+          <div class="uk-flex uk-flex-right">
+            <button *ngIf="editingSalary && idSelected" class="uk-button uk-button-danger" href="" (click)="removeSalary()">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

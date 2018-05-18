@@ -1,0 +1,53 @@
+<li>
+  <div class="uk-child-width-1-1@m" uk-grid>
+    <div>
+      <div class="uk-grid" uk-grid>
+        <div class="uk-width-2-3@m">
+          <div *ngIf="editingDeduction || addingDeduction" class="uk-child-width-1-2@m" uk-grid>
+            <div>
+              <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+                <div>
+                  <select [(ngModel)]="tempDeduction.type" class="uk-select">
+                    <option [selected]="tempDeduction.type === 1" value="true">Percentage</option>
+                    <option [selected]="tempDeduction.type === 0" value="false">Fixed</option>
+                  </select>
+                </div>
+                <div>
+                  <input [(ngModel)]="tempDeduction.amount" class="uk-input" placeholder="Amount" type="text">
+                </div>
+              </div>
+            </div>
+            <div>
+              <input [(ngModel)]="tempDeduction.description" class="uk-input" placeholder="Description" type="text">
+            </div>
+          </div>
+          <p *ngIf="!editingDeduction && !addingDeduction">Listed below is {{ employee.firstName }} {{ employee.lastName }}'s history of annual deductions during their role
+            as a {{ employee.role }}. Currently, {{employee.firstName}}'s annual deduction total as a {{employee.role}} is
+            <span>
+              <b>${{totalDeductions}}</b>
+            </span>.
+          </p>
+        </div>
+        <div class="uk-width-1-3@m">
+          <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+            <div *ngIf="editingDeduction || addingDeduction">
+              <button class="uk-button uk-button-default uk-width-1-1 uk-padding-remove" href="" (click)="cancelDeduction()">Cancel</button>
+            </div>
+            <div *ngIf="addingDeduction">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="saveDeduction()">Save</button>
+            </div>
+            <div *ngIf="editingDeduction">
+              <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" href="" (click)="updateDeduction()">Update</button>
+            </div>
+          </div>
+          <button *ngIf="!editingDeduction && !addingDeduction" class="uk-button uk-button-secondary uk-width-1-1" href="" (click)="addDeduction()">Add Deduction</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-deduction *ngFor="let deduction of deductions" [deduction]="deduction" [editingDeduction]="editingDeduction" [idSelected]="selectedId === deduction.id"
+        [employee]="employee" (editDeductionEvent)="editEventHandler($event)" (selectDeductionEvent)="selectEventHandler($event)"
+        (removeDeductionEvent)="removeEventHandler($event)"></app-deduction>
+    </div>
+  </div>
+</li>

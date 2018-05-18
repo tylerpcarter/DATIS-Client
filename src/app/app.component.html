@@ -1,0 +1,44 @@
+<div>
+    <nav class="uk-navbar-container uk-padding uk-padding-remove-vertical" uk-navbar="mode: click">
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a routerLink="" routerLinkActive="uk-active">
+                        <img class="uk-preserve" style="width: 100px; height: auto;" src="assets/delos.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li class="uk-visible@m">
+                    <a routerLink="employees">Employees</a>
+                </li>
+                <li class="uk-visible@m">
+                    <a routerLink="about">About</a>
+                </li>
+                <li class="uk-hidden@m">
+                    <a>
+                        <span uk-icon="icon: menu; ratio: 1" uk-toggle="target: #offcanvas-nav-primary"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="offcanvas-nav-primary" uk-offcanvas>
+            <div class="uk-offcanvas-bar">
+                <ul class="uk-nav uk-nav-default">
+                    <li>
+                        <h3><a routerLink="" routerLinkActive="uk-active" style="text-decoration: none;">Home</a></h3>
+                    </li>
+                    <li>
+                        <h3><a routerLink="employees" style="text-decoration: none;">Employees</a></h3>
+                    </li>
+                    <li>
+                        <h3><a routerLink="about" style="text-decoration: none;">About</a></h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <router-outlet></router-outlet>
+</div>

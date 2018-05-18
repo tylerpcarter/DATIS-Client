@@ -1,0 +1,23 @@
+<ul class="uk-animation-fade uk-list uk-no-select">
+    <li>
+      <h3 (click)="selectDeduction()" class="uk-accordion-title">
+        <span *ngIf="deduction.type">%</span>
+        <span *ngIf="!deduction.type">$</span>
+        {{ deduction.amount }}</h3>
+      <div *ngIf="idSelected" class="uk-accordion-content">
+        <div class="uk-grid">
+          <div (click)="selectDeduction()" class="uk-width-3-4@m">
+            <p class="uk-margin-bottom">{{ deduction.description }}</p>
+          </div>
+          <div class="uk-width-1-4@m">
+            <div class="uk-flex uk-flex-right">
+              <button *ngIf="!editingDeduction" class="uk-button uk-button-secondary" href="" (click)="editDeduction()">Edit</button>
+            </div>
+            <div class="uk-flex uk-flex-right">
+              <button *ngIf="editingDeduction && idSelected" class="uk-button uk-button-danger" href="" (click)="removeDeduction()">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>

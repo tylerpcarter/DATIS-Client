@@ -1,0 +1,20 @@
+<ul class="uk-animation-fade uk-list uk-no-select">
+    <li>
+      <h3 (click)="selectBonus()" class="uk-accordion-title">${{ b.amount }}</h3>
+      <div *ngIf="idSelected" class="uk-accordion-content">
+        <div class="uk-grid">
+          <div (click)="selectBonus()" class="uk-width-3-4@m">
+            <p class="uk-margin-bottom">{{ b.description }}</p>
+          </div>
+          <div class="uk-width-1-4@m">
+            <div class="uk-flex uk-flex-right">
+              <button *ngIf="!editingBonus" class="uk-button uk-button-secondary" href="" (click)="editBonus()">Edit</button>
+            </div>
+            <div class="uk-flex uk-flex-right">
+              <button *ngIf="editingBonus && idSelected" class="uk-button uk-button-danger" href="" (click)="removeBonus()">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>

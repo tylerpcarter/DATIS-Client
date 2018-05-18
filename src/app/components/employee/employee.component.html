@@ -4,34 +4,13 @@
       <div class="uk-grid" uk-grid>
         <div [ngClass]="employeeCardSize" class="employeeCard">
           <div class="uk-card uk-card-primary uk-card-body uk-padding-small">
-            <button
-              *ngIf="!editingEmployee && !removingEmployee"
-              href=""
-              class="uk-icon-button uk-employee-button uk-button-default"
-              uk-icon="pencil"
-              (click)="editEmployee()"
-              ></button>
-              <button
-              *ngIf="!editingEmployee && !removingEmployee"
-              href=""
-              class="uk-icon-button uk-employee-remove-button uk-button-default"
-              uk-icon="trash"
-              (click)="removeEmployee()"
-              ></button>
-              <button
-              *ngIf="removingEmployee"
-              href=""
-              class="uk-icon-button uk-employee-button uk-button-default"
-              uk-icon="close"
-              (click)="cancelEmployee()"
-              ></button>
-              <button
-              *ngIf="removingEmployee"
-              href=""
-              class="uk-icon-button uk-employee-remove-button uk-button-default"
-              uk-icon="check"
-              (click)="deleteEmployee()"
-              ></button>
+            <button *ngIf="!editingEmployee && !removingEmployee" href="" class="uk-icon-button uk-employee-button uk-button-default"
+              uk-icon="pencil" (click)="editEmployee()"></button>
+            <button *ngIf="!editingEmployee && !removingEmployee" href="" class="uk-icon-button uk-employee-remove-button uk-button-default"
+              uk-icon="trash" (click)="removeEmployee()"></button>
+            <button *ngIf="removingEmployee" href="" class="uk-icon-button uk-employee-button uk-button-default" uk-icon="close" (click)="cancelEmployee()"></button>
+            <button *ngIf="removingEmployee" href="" class="uk-icon-button uk-employee-remove-button uk-button-default" uk-icon="check"
+              (click)="deleteEmployee()"></button>
             <div *ngIf="editingEmployee" class="uk-child-width-1-4@m uk-padding uk-padding-remove-horizontal uk-animation-fade" uk-grid>
               <div>
                 <input [(ngModel)]="tempEmployee.firstName" class="uk-input" placeholder="First Name">
@@ -43,14 +22,14 @@
                 <input [(ngModel)]="tempEmployee.role" class="uk-input" placeholder="Current Role">
               </div>
               <div>
-                  <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
-                      <div>
-                        <button class="uk-button uk-button-default uk-width-1-1 uk-padding-remove" href="" (click)="cancelEmployee()">Cancel</button>
-                      </div>
-                      <div>
-                        <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" (click)="updateEmployee()" href="">Update</button>
-                      </div>
-                    </div>
+                <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+                  <div>
+                    <button class="uk-button uk-button-default uk-width-1-1 uk-padding-remove" href="" (click)="cancelEmployee()">Cancel</button>
+                  </div>
+                  <div>
+                    <button class="uk-button uk-button-primary uk-width-1-1 uk-padding-remove" (click)="updateEmployee()" href="">Update</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div *ngIf="!editingEmployee" class="uk-grid uk-height-1-1">
@@ -66,18 +45,24 @@
           </div>
         </div>
         <div *ngIf="!editingEmployee" class="uk-width-1-2@m">
-          <div class="uk-height-1-1 uk-animation-scale-up uk-flex uk-flex-center uk-flex-middle">
-            <div>
-              <div class="uk-child-width-1-2@m uk-grid-divider" uk-grid>
-                <div class="uk-text-right takehome-calculation uk-visible@m">
-                  <p>{{ computedCurrentSalary }}</p>
-                  <p class="plus"> {{ computedTotalBonuses }}</p>
-                  <p class="minus"> {{ computedTotalDeductions }}</p>
+          <div class="">
+            <div class="" style="margin: 0 auto;">
+              <div class="uk-child-width-1-2@m uk-grid-divider uk-grid-small" uk-grid>
+                <div>
+                  <div class="uk-text-right takehome-calculation uk-visible@m">
+                    <p>{{ computedCurrentSalary }}</p>
+                    <p class="plus"> {{ computedTotalBonuses }}</p>
+                    <p class="minus"> {{ computedTotalDeductions }}</p>
+                  </div>
                 </div>
-                <div class="uk-text-center">
-                  <h3 class="uk-margin-remove-bottom uk-margin-auto">${{ computedTakeHomePay }}</h3>
-                  <p class="uk-margin-remove-vertical uk-margin-auto">Take Home</p>
+
+                <div>
+                  <div class="uk-text-center">
+                    <h3 class="uk-margin-remove-bottom uk-margin-auto">${{ computedTakeHomePay }}</h3>
+                    <p class="uk-margin-remove-vertical uk-margin-auto">Take Home</p>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -90,7 +75,7 @@
           <a href="#">Salary</a>
         </li>
         <li class="uk-width-1-3">
-            <a href="#">Bonus</a>
+          <a href="#">Bonus</a>
         </li>
         <li class="uk-width-1-3">
           <a href="#">Deduction</a>
@@ -100,31 +85,13 @@
       </ul>
 
       <ul class="uk-switcher uk-margin-large">
-      
-        <app-salaries
-          [salaries]="employee.salaries"
-          [employee]="employee"
-          [currentSalary]="computedCurrentSalary"
-          (createSalaryEvent)="createSalaryHandler($event)"
-          (updateSalaryEvent)="updateSalaryHandler($event)"
-          (deleteSalaryEvent)="deleteSalaryHandler($event)"
-        ></app-salaries>
-        <app-bonuses
-          [bonus]="employee.bonus"
-          [employee]="employee"
-          [totalBonuses]="computedTotalBonuses"
-          (createBonusEvent)="createBonusHandler($event)"
-          (updateBonusEvent)="updateBonusHandler($event)"
-          (deleteBonusEvent)="deleteBonusHandler($event)"
-        ></app-bonuses>
-        <app-deductions
-          [deductions]="employee.deductions"
-          [employee]="employee"
-          [totalDeductions]=computedTotalDeductions
-          (createDeductionEvent)="createDeductionHandler($event)"
-          (updateDeductionEvent)="updateDeductionHandler($event)"
-          (deleteDeductionEvent)="deleteDeductionHandler($event)"
-        ></app-deductions>
+
+        <app-salaries [salaries]="employee.salaries" [employee]="employee" [currentSalary]="computedCurrentSalary" (createSalaryEvent)="createSalaryHandler($event)"
+          (updateSalaryEvent)="updateSalaryHandler($event)" (deleteSalaryEvent)="deleteSalaryHandler($event)"></app-salaries>
+        <app-bonuses [bonus]="employee.bonus" [employee]="employee" [totalBonuses]="computedTotalBonuses" (createBonusEvent)="createBonusHandler($event)"
+          (updateBonusEvent)="updateBonusHandler($event)" (deleteBonusEvent)="deleteBonusHandler($event)"></app-bonuses>
+        <app-deductions [deductions]="employee.deductions" [employee]="employee" [totalDeductions]=computedTotalDeductions (createDeductionEvent)="createDeductionHandler($event)"
+          (updateDeductionEvent)="updateDeductionHandler($event)" (deleteDeductionEvent)="deleteDeductionHandler($event)"></app-deductions>
       </ul>
     </div>
   </div>

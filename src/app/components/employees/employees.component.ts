@@ -12,7 +12,8 @@ import { Employee } from '../../classes/employee';
 export class EmployeesComponent implements OnInit {
 
   constructor(
-    public service: EmployeeService
+    public service: EmployeeService,
+    public router: Router
   ) { }
 
   public search: string = '';
@@ -47,5 +48,9 @@ export class EmployeesComponent implements OnInit {
       ));
     }
     return [];
+  }
+
+  addEmployee() {
+    this.router.navigateByUrl('/employees/new');
   }
 }
